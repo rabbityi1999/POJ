@@ -14,13 +14,25 @@ double r;
 #define N 1000
 double sum; 
 /*难点在于，结点的顺序是乱的
-需要记录这个level，但是 
+需要记录这个level
 */
-//对应节点号，level 
-map<int,int> level;
+
+/*这里自己最后一个点运行超时了，自己的实现方法和官方的操作方法区别在于，
+他们使用了DFS，DFS跟动态规划的思路比较像，在通常的情况下是可以节省时间的
+自己对于每一个叶子结点都需要从底到根的遍历，非常消耗时间。
+DFS则可以重用，所以，尽管自己的代码算法思考起来比较简单，但是还是建议采用DFS的方式实现 
+*/
+
+/*
+自己总是容易把注意力放在高端的STL操作上，而非算法上而浪费太多时间。
+比如这里的instringstream开始自己的读入方法，非常的复杂，还因为getchar 的问题而失分了。
+一开始，一定要把注意力放在算法上！！！如何降低时间复杂度。
+STL难度太大，容易使得debug出现困难。能用巧妙的算法解决的，绝对不要上乱七八糟的骚操作。充分挖掘题目信息！ 
+*/ 
+
 int fa[N] = {0};
 //对应零售商号码，和销售总额
-map<int,int> sale;//商品可以拆开卖吗
+map<int,int> sale;
 
 void input_copy(int no){
 	string input;
@@ -56,14 +68,7 @@ int b;
 		sale[no]=b; 
 	}
 }
-double POW(double x,int y,double z){
-	int i;
-	double mul=1;
-	for(i=0;i<y;i++){
-		mul=x*mul;
-	} 
-	return mul*z;
-}
+
 int main(){
 	int now;
 	int i,j,count;
@@ -96,5 +101,4 @@ int main(){
 	printf("%.1f",sum);
 	return 0;
 }
-
 
